@@ -1,0 +1,29 @@
+.tile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dark-tile {
+  background-color: var(--bg-color-secundary);
+}
+
+.light-tile {
+  background-color: var(--bg-color-tertiary);
+}
+
+.chess-piece {
+  width: var(--pieces-size);
+  height: var(--pieces-size);
+  background-size: var(--tiles-size);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.chess-piece:hover {
+  cursor: grab;
+}
+
+.chess-piece:active {
+  cursor: grabbing;
+}
