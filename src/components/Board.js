@@ -1,14 +1,15 @@
-// import { useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import "../styles/board.css";
 import Tile from "./Tile";
 import { Pieces, movingPiece, clickedPiece, droppingPiece } from "./Pieces";
 
 const columns = ["a", "b", "c", "d", "e", "f", "g", "h"];
 const rows = [1, 2, 3, 4, 5, 6, 7, 8];
-const pieces = Pieces();
 
 const Board = () => {
   let board = [];
+
+  const [pieces, SetPieces] = useState(Pieces);
 
   for (let i = rows.length - 1; i >= 0; i--) {
     for (let j = 0; j < columns.length; j++) {
@@ -25,10 +26,13 @@ const Board = () => {
     }
   }
 
+  const ref = useRef();
+
   return (
     <div
+      ref={ref}
       onMouseUp={droppingPiece}
-      onMouseMove={movingPiece}
+      onMouseMove={(e) => movingPiece(e, ref)}
       onMouseDown={clickedPiece}
       className="board"
     >

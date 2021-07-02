@@ -42,15 +42,23 @@ export const clickedPiece = (e) => {
   }
 };
 
-export const movingPiece = (e) => {
-  if (el) {
-    const x = e.clientX;
-    const y = e.clientY;
-    el.style.left = `calc(${x}px - (var(--pieces-size) / 2))`;
-    el.style.top = `calc(${y}px - (var(--pieces-size) / 2))`;
-  }
+export const droppingPiece = () => {
+  el = null;
 };
 
-export const droppingPiece = (e) => {
-  el = null;
+export const movingPiece = (e, { current }) => {
+  const minX = current.offsetLeft;
+  const minY = current.offsetTop;
+  const maxX = minX + current.clientWidth - current.offsetWidth / 8;
+  const maxY = minY + current.clientHeight - current.clientHeight / 8;
+
+  if (el) {
+    const x = e.clientX - current.offsetWidth / 16;
+    const y = e.clientY - current.offsetHeight / 16;
+
+    if (x > minX && x < maxX && y > minY && y < maxY) {
+      el.style.left = `${x}px`;
+      el.style.top = `${y}px`;
+    }
+  }
 };
